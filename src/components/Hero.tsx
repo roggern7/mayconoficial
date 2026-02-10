@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Instagram } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const WHATSAPP_URL = "https://wa.me/5589994465218?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20as%20chuteiras.";
