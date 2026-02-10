@@ -16,7 +16,7 @@ export const Header = () => {
           onClick={() => navigate("/")}
           className="flex items-center gap-2 cursor-pointer"
         >
-          <img src={logo} alt="Maycon Imports" className="h-10 w-auto object-contain" />
+          <span className="font-display text-lg tracking-widest text-primary font-bold">MAYCON IMPORTS</span>
         </button>
 
         <nav className="hidden md:flex items-center gap-6">
