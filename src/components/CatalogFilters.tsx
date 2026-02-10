@@ -68,7 +68,7 @@ export const CatalogFilters = ({
             {availableSizes.map((size) => (
               <button
                 key={size}
-                onClick={() => onSizeSelect(size)}
+                onClick={() => onSizeSelect(selectedSize === size ? null : size)}
                 className={`w-9 h-9 rounded-md text-xs font-semibold transition-smooth border ${
                   selectedSize === size
                     ? "bg-primary text-primary-foreground border-primary"
