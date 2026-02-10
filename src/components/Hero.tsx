@@ -50,6 +50,16 @@ export const Hero = () => {
               FALE CONOSCO
             </Button>
           </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="outline"
+              size="lg"
+              className="font-display tracking-wider text-base px-8 py-6 gap-2 border-primary/50 text-primary hover:bg-primary/10"
+            >
+              <Instagram className="w-5 h-5" />
+              INSTAGRAM
+            </Button>
+          </a>
         </div>
 
         <div className="mt-14 text-muted-foreground text-sm tracking-[0.25em] font-display">
