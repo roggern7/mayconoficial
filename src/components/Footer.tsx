@@ -25,13 +25,13 @@ export const Footer = () => {
 
         <div className="border-t border-border pt-8 mt-12">
           <div className="flex flex-col md:flex-row justify-between items-center text-muted-foreground">
-            <div className="mb-4 md:mb-0">
+            <div className="mb-4 md:mb-0 text-left">
               <p className="font-display text-2xl font-bold text-gold-gradient">MAYCON IMPORTS</p>
               <p className="text-sm">Chuteiras de elite</p>
-              <p className="text-sm flex items-center gap-1 mt-1">
-                <MapPin className="w-3.5 h-3.5" />
-                Oeiras, PI
-              </p>
+            </div>
+            <div className="text-sm flex items-center gap-1 mb-4 md:mb-0">
+              <MapPin className="w-3.5 h-3.5" />
+              Oeiras, PI
             </div>
             <div className="text-sm text-center md:text-right">
               <p>© 2025 Maycon Imports. Todos os direitos reservados.</p>
