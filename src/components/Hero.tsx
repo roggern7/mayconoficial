@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Instagram } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const WHATSAPP_URL = "https://wa.me/5589994465218?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20as%20chuteiras.";
@@ -48,6 +48,16 @@ export const Hero = () => {
             >
               <MessageCircle className="w-5 h-5" />
               FALE CONOSCO
+            </Button>
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="outline"
+              size="lg"
+              className="font-display tracking-wider text-base px-8 py-6 gap-2 border-primary/50 text-primary hover:bg-primary/10"
+            >
+              <Instagram className="w-5 h-5" />
+              INSTAGRAM
             </Button>
           </a>
         </div>
