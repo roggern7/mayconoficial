@@ -31,7 +31,13 @@ export const CatalogFilters = ({
           {CATEGORIES.map((cat) => (
             <button
               key={cat.label}
-              onClick={() => onCategorySelect(cat.value)}
+              onClick={() => {
+                if (cat.value !== null && selectedCategory === cat.value) {
+                  onCategorySelect(null);
+                } else {
+                  onCategorySelect(cat.value);
+                }
+              }}
               className={`px-4 py-2 rounded-md text-sm font-display tracking-wider transition-smooth border ${
                 selectedCategory === cat.value
                   ? "bg-primary text-primary-foreground border-primary"
