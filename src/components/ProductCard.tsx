@@ -9,14 +9,9 @@ interface ProductCardProps {
 
 export const ProductCard = ({ produto }: ProductCardProps) => {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
-  const [showWarning, setShowWarning] = useState(false);
 
   const handleBuy = () => {
-    if (!selectedSize) {
-      setShowWarning(true);
-      return;
-    }
-    setShowWarning(false);
+    if (!selectedSize) return;
     const preco = produto.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     const message = `Olá! Tenho interesse na chuteira ${produto.nome} (${produto.categoria}). Preço: ${preco}. Tamanho: ${selectedSize}. Pode me informar disponibilidade e prazo de envio?`;
     window.open(
@@ -63,10 +58,7 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
             {produto.tamanhosDisponiveis.map((size) => (
               <button
                 key={size}
-                onClick={() => {
-                  setSelectedSize(size);
-                  setShowWarning(false);
-                }}
+                onClick={() => setSelectedSize(selectedSize === size ? null : size)}
                 className={`w-9 h-9 rounded-md text-xs font-semibold transition-smooth border ${
                   selectedSize === size
                     ? "bg-primary text-primary-foreground border-primary"
@@ -77,17 +69,15 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
               </button>
             ))}
           </div>
-          {showWarning && (
-            <p className="text-xs text-destructive mt-1.5">Selecione um tamanho</p>
-          )}
         </div>
 
         <Button
           onClick={handleBuy}
-          className="w-full gap-2 font-display tracking-wider"
+          disabled={!selectedSize}
+          className={`w-full gap-2 font-display tracking-wider ${!selectedSize ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <MessageCircle className="w-4 h-4" />
-          COMPRAR NO WHATSAPP
+          {selectedSize ? "COMPRAR NO WHATSAPP" : "SELECIONE O TAMANHO"}
         </Button>
       </div>
     </div>
