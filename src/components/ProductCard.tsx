@@ -12,11 +12,7 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
   const [showWarning, setShowWarning] = useState(false);
 
   const handleBuy = () => {
-    if (!selectedSize) {
-      setShowWarning(true);
-      return;
-    }
-    setShowWarning(false);
+    if (!selectedSize) return;
     const preco = produto.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     const message = `Olá! Tenho interesse na chuteira ${produto.nome} (${produto.categoria}). Preço: ${preco}. Tamanho: ${selectedSize}. Pode me informar disponibilidade e prazo de envio?`;
     window.open(
