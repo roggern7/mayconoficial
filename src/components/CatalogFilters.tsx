@@ -13,6 +13,8 @@ const CATEGORIES: { label: string; value: Categoria | null }[] = [
   { label: "CAMPO", value: "CAMPO" },
   { label: "FUTSAL", value: "FUTSAL" },
   { label: "SOCIETY", value: "SOCIETY" },
+  { label: "MEIAS", value: "MEIAS" },
+  { label: "CANELEIRAS", value: "CANELEIRAS" },
 ];
 
 export const CatalogFilters = ({
