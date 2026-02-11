@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -22,39 +22,13 @@ export const ProductImageCarousel = ({
   const hasMultiple = images.length > 1;
   const objectFit = variant === "modal" ? "object-contain" : "object-cover";
 
-  const onSelect = useCallback(() => {
+  useEffect(() => {
     if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  // Attach select listener
-  useState(() => {
-    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
     emblaApi.on("select", onSelect);
+    onSelect();
     return () => { emblaApi.off("select", onSelect); };
-  });
-
-  // Re-attach when api changes
-  const setRef = useCallback(
-    (node: HTMLDivElement | null) => {
-      if (node) {
-        // emblaRef handles this
-      }
-    },
-    []
-  );
-
-  // We need useEffect-like behavior for embla events
-  // Using a workaround with ref callback
-  const combinedRef = useCallback(
-    (node: HTMLDivElement | null) => {
-      (emblaRef as any)(node);
-      if (emblaApi) {
-        emblaApi.on("select", onSelect);
-      }
-    },
-    [emblaRef, emblaApi, onSelect]
-  );
+  }, [emblaApi]);
 
   const scrollPrev = useCallback(
     (e: React.MouseEvent) => {
