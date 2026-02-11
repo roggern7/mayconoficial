@@ -1,7 +1,7 @@
 import { ShoppingBag, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const WHATSAPP_URL = "https://wa.me/5589994465218?text=Olá!%20Gostaria%20de%20saber%20quais%20chuteiras%20estão%20disponíveis.";
+const WHATSAPP_URL = "https://wa.me/5589994703378?text=Olá!%20Gostaria%20de%20saber%20quais%20chuteiras%20estão%20disponíveis.";
 
 export const EmptyState = () => {
   return (
