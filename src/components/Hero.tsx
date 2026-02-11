@@ -50,7 +50,7 @@ export const Hero = () => {
               FALE CONOSCO
             </Button>
           </a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/maycon_importsof/" target="_blank" rel="noopener noreferrer">
             <Button
               variant="outline"
               size="lg"
