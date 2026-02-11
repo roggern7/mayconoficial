@@ -52,9 +52,9 @@ export const ProductImageModal = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl w-[95vw] p-2 sm:p-4 bg-background/95 backdrop-blur-md border-border">
-        <VisuallyHidden>
+        <DialogHeader className="sr-only">
           <DialogTitle>{alt}</DialogTitle>
-        </VisuallyHidden>
+        </DialogHeader>
 
         {/* Main image carousel */}
         <div className="relative aspect-square sm:aspect-[4/3] w-full bg-secondary/50 rounded-md overflow-hidden">
