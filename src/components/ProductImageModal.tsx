@@ -3,8 +3,8 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  DialogHeader,
 } from "@/components/ui/dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
