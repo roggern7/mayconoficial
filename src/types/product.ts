@@ -1,4 +1,4 @@
-export type Categoria = "CAMPO" | "FUTSAL" | "SOCIETY";
+export type Categoria = "CAMPO" | "FUTSAL" | "SOCIETY" | "MEIAS" | "CANELEIRAS";
 
 export interface Produto {
   nome: string;
