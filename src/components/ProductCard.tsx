@@ -9,7 +9,6 @@ interface ProductCardProps {
 
 export const ProductCard = ({ produto }: ProductCardProps) => {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
-  const [showWarning, setShowWarning] = useState(false);
 
   const handleBuy = () => {
     if (!selectedSize) return;
