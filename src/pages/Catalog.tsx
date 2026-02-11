@@ -5,9 +5,10 @@ import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { CatalogFilters } from "@/components/CatalogFilters";
 import { ProductCard } from "@/components/ProductCard";
 import { EmptyState } from "@/components/EmptyState";
-import { produtos } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ArrowLeft, Search, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import type { Categoria } from "@/types/product";
 
@@ -15,20 +16,23 @@ const Catalog = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<Categoria | null>(null);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { data: produtos = [], isLoading, isError } = useProducts({
+    categoria: selectedCategory,
+    q: searchQuery || undefined,
+  });
 
   const filtered = useMemo(() => {
-    return produtos.filter((p) => {
-      if (selectedCategory && p.categoria !== selectedCategory) return false;
-      if (selectedSize && !p.tamanhosDisponiveis.includes(selectedSize)) return false;
-      return true;
-    });
-  }, [selectedCategory, selectedSize]);
+    if (!selectedSize) return produtos;
+    return produtos.filter((p) => p.tamanhosDisponiveis.includes(selectedSize));
+  }, [produtos, selectedSize]);
 
   const availableSizes = useMemo(() => {
     const sizes = new Set<number>();
     produtos.forEach((p) => p.tamanhosDisponiveis.forEach((s) => sizes.add(s)));
     return Array.from(sizes).sort((a, b) => a - b);
-  }, []);
+  }, [produtos]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -54,6 +58,17 @@ const Catalog = () => {
           </p>
         </header>
 
+        {/* Search */}
+        <div className="relative max-w-md mx-auto mb-6">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Input
+            placeholder="Buscar por nome ou descrição..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+
         <div className="mb-8">
           <CatalogFilters
             selectedCategory={selectedCategory}
@@ -64,14 +79,20 @@ const Catalog = () => {
           />
         </div>
 
-        {!filtered.length && produtos.length > 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        ) : isError ? (
+          <EmptyState />
+        ) : filtered.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-muted-foreground font-display text-lg">
-              Nenhum produto encontrado com esses filtros.
+              {produtos.length > 0
+                ? "Nenhum produto encontrado com esses filtros."
+                : "Nenhum produto disponível no momento."}
             </p>
           </div>
-        ) : filtered.length === 0 ? (
-          <EmptyState />
         ) : (
           <>
             <p className="text-muted-foreground text-center mb-6">

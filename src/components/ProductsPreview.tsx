@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { produtos } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 import { ProductCard } from "./ProductCard";
 import { EmptyState } from "./EmptyState";
+import { Loader2 } from "lucide-react";
 
 export const ProductsPreview = () => {
   const navigate = useNavigate();
+  const { data: produtos = [], isLoading } = useProducts();
   const destaques = produtos.slice(0, 4);
 
   return (
@@ -20,7 +22,11 @@ export const ProductsPreview = () => {
           </p>
         </div>
 
-        {destaques.length === 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        ) : destaques.length === 0 ? (
           <EmptyState />
         ) : (
           <>
