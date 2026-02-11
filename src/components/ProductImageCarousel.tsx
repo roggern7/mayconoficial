@@ -84,7 +84,7 @@ export const ProductImageCarousel = ({
       onMouseEnter={() => setShowArrows(true)}
       onMouseLeave={() => setShowArrows(false)}
     >
-      <div ref={combinedRef} className="overflow-hidden h-full cursor-pointer" onClick={onImageClick}>
+      <div ref={emblaRef} className="overflow-hidden h-full cursor-pointer" onClick={onImageClick}>
         <div className="flex h-full">
           {images.map((img, i) => (
             <div key={i} className="min-w-0 shrink-0 grow-0 basis-full h-full">
