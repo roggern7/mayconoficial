@@ -25,7 +25,7 @@ export const Hero = () => {
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
         <h1 className="font-display text-6xl sm:text-7xl md:text-8xl font-bold tracking-wider mb-4">
           <span className="block text-foreground">MAYCON</span>
-          <span className="block text-gold-gradient">IMPORTS</span>
+          <span className="block text-blue-gradient">IMPORTS</span>
         </h1>
 
         <p className="font-display text-lg sm:text-xl tracking-[0.3em] text-muted-foreground mb-10 uppercase">
