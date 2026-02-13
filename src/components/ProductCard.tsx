@@ -40,6 +40,8 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
             alt={produto.nome}
             className="w-full h-full object-cover transition-smooth group-hover:scale-105"
             loading="lazy"
+            decoding="async"
+            fetchPriority="low"
             onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
           />
         </div>
