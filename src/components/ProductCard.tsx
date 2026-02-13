@@ -25,7 +25,7 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
     const preco = produto.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     const imageUrl = produto.imagem || produto.imagemThumb || "";
     let message = `Olá! Tenho interesse na chuteira *${produto.nome}* (${produto.categoria}) no tamanho *${selectedSize}*. Preço: ${preco}.`;
-    if ((produto as any).id) message += `\nID: ${(produto as any).id}`;
+    
     if (imageUrl) message += `\n\nFoto: ${imageUrl}`;
     window.open(
       `https://wa.me/5589994703378?text=${encodeURIComponent(message)}`,
