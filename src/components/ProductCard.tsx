@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
-import { ProductImageCarousel } from "@/components/ProductImageCarousel";
+
 import { ProductImageModal } from "@/components/ProductImageModal";
 import type { Produto } from "@/types/product";
 
@@ -14,7 +14,9 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const mainImage = produto.imagemThumb || produto.imagem;
-  const images = useMemo(() => {
+
+  // All images (including extras) only for the modal
+  const allImages = useMemo(() => {
     return [mainImage, ...(produto.imagensExtras || [])].filter(Boolean);
   }, [mainImage, produto.imagensExtras]);
 
@@ -32,11 +34,13 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
   return (
     <>
       <div className="bg-card rounded-lg overflow-hidden border border-border card-glow card-glow-hover transition-smooth group">
-        <div className="aspect-square overflow-hidden bg-secondary">
-          <ProductImageCarousel
-            images={images}
+        <div className="aspect-square overflow-hidden bg-secondary cursor-pointer" onClick={() => setModalOpen(true)}>
+          <img
+            src={mainImage}
             alt={produto.nome}
-            onImageClick={() => setModalOpen(true)}
+            className="w-full h-full object-cover transition-smooth group-hover:scale-105"
+            loading="lazy"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).src = "/placeholder.svg"; }}
           />
         </div>
 
@@ -90,7 +94,7 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
       <ProductImageModal
         open={modalOpen}
         onOpenChange={setModalOpen}
-        images={images}
+        images={allImages}
         alt={produto.nome}
       />
     </>
