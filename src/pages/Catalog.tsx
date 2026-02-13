@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
@@ -17,6 +17,7 @@ const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<Categoria | null>(null);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(12);
 
   const { data: produtos = [], isLoading, isError } = useProducts({
     categoria: selectedCategory,
@@ -27,6 +28,13 @@ const Catalog = () => {
     if (!selectedSize) return produtos;
     return produtos.filter((p) => p.tamanhosDisponiveis.includes(selectedSize));
   }, [produtos, selectedSize]);
+
+  // Reset visible count when filters change
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [selectedCategory, selectedSize, searchQuery]);
+
+  const visibleProducts = filtered.slice(0, visibleCount);
 
   const availableSizes = useMemo(() => {
     const sizes = new Set<number>();
@@ -99,12 +107,24 @@ const Catalog = () => {
               {filtered.length} produto(s) encontrado(s)
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filtered.map((produto, i) => (
+              {visibleProducts.map((produto, i) => (
                 <div key={i} className="animate-fade-in" style={{ animationDelay: `${i * 50}ms` }}>
                   <ProductCard produto={produto} />
                 </div>
               ))}
             </div>
+            {visibleCount < filtered.length && (
+              <div className="text-center mt-8">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => setVisibleCount((c) => c + 12)}
+                  className="font-display tracking-wider"
+                >
+                  CARREGAR MAIS ({filtered.length - visibleCount} restantes)
+                </Button>
+              </div>
+            )}
           </>
         )}
       </div>
