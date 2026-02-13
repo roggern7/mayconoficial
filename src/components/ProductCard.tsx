@@ -13,9 +13,10 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
+  const mainImage = produto.imagemThumb || produto.imagem;
   const images = useMemo(() => {
-    return [produto.imagem, ...(produto.imagensExtras || [])].filter(Boolean);
-  }, [produto.imagem, produto.imagensExtras]);
+    return [mainImage, ...(produto.imagensExtras || [])].filter(Boolean);
+  }, [mainImage, produto.imagensExtras]);
 
   const handleBuy = () => {
     if (!selectedSize) return;

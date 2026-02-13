@@ -55,7 +55,7 @@ export const ProductImageCarousel = ({
 
   if (images.length === 0) {
     return (
-      <div className="aspect-square bg-secondary flex items-center justify-center">
+      <div className="aspect-square bg-secondary flex items-center justify-center min-h-[200px]">
         <img src="/placeholder.svg" alt={alt} className="w-full h-full object-cover" />
       </div>
     );
