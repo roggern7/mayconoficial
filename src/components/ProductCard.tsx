@@ -23,7 +23,8 @@ export const ProductCard = ({ produto }: ProductCardProps) => {
   const handleBuy = () => {
     if (!selectedSize) return;
     const preco = produto.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-    const message = `Olá! Tenho interesse na chuteira *${produto.nome}* no tamanho *${selectedSize}*. Está disponível?`;
+    const imagemUrl = produto.imagem || produto.imagemThumb || "";
+    const message = `Olá! Tenho interesse na chuteira *${produto.nome}* (${produto.categoria}) no tamanho *${selectedSize}*. Preço: ${preco}.\n\nFoto: ${imagemUrl}`;
     window.open(
       `https://wa.me/5589994703378?text=${encodeURIComponent(message)}`,
       "_blank",
